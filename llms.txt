@@ -1,0 +1,299 @@
+# spotify-web-api
+
+You can use Spotify's Web API to discover music and podcasts, manage your Spotify library, control audio playback, and much more. Browse our available Web API endpoints using the sidebar at left, or via the navigation bar on top of this page on smaller screens.
+
+In order to make successful Web API requests your app will need a valid access token. One can be obtained through <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">OAuth 2.0</a>.
+
+The base URI for all Web API requests is `https://api.spotify.com/v1`.
+
+Need help? See our <a href="https://developer.spotify.com/documentation/web-api/guides/">Web API guides</a> for more information, or visit the <a href="https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer">Spotify for Developers community forum</a> to ask questions and connect with other developers.
+
+
+This file is the agent-facing overview of the `spotify-web-api` CLI. It explains what the tool does and how to use it well — *not* every flag of every command. For per-command details run `spotify-web-api <command> --help` or `spotify-web-api <command> --schema` (returns JSON).
+
+## Install
+
+The binary is `spotify-web-api`. Build from source or download a release.
+
+## Authentication
+
+- OAuth2 — run `spotify-web-api login` to authorize, `spotify-web-api logout` to revoke
+
+Run `spotify-web-api configure` to set credentials interactively.
+
+## Commands
+
+spotify-web-api groups operations by resource. One or two examples per group below — for the full set of commands and flags use `spotify-web-api <group> --help`.
+
+### `albums`
+
+```bash
+spotify-web-api albums artists-get-albums-by-id --id <string>    # Get Artist's Albums
+
+```
+
+```bash
+spotify-web-api albums check-saved --ids <string>    # Check User's Saved Albums
+
+```
+
+List all commands in this group: `spotify-web-api albums --help`
+
+### `artists`
+
+```bash
+spotify-web-api artists artists-get-catalog-info --id <string>    # Get Artist
+
+```
+
+```bash
+spotify-web-api artists get-albums-by-id --id <string>    # Get Artist's Albums
+
+```
+
+List all commands in this group: `spotify-web-api artists --help`
+
+### `audiobooks`
+
+```bash
+spotify-web-api audiobooks check-user-saved --ids <string>    # Check User's Saved Audiobooks
+
+```
+
+```bash
+spotify-web-api audiobooks get-catalog-info --id <string>    # Get an Audiobook
+
+```
+
+List all commands in this group: `spotify-web-api audiobooks --help`
+
+### `categories`
+
+```bash
+spotify-web-api categories get-single --category-id <string>    # Get Single Browse Category
+
+```
+
+```bash
+spotify-web-api categories list-several    # Get Several Browse Categories
+
+```
+
+List all commands in this group: `spotify-web-api categories --help`
+
+### `chapters`
+
+```bash
+spotify-web-api chapters audiobooks-get-chapters-by-id --id <string>    # Get Audiobook Chapters
+
+```
+
+```bash
+spotify-web-api chapters get-chapter-info --id <string>    # Get a Chapter
+
+```
+
+List all commands in this group: `spotify-web-api chapters --help`
+
+### `episodes`
+
+```bash
+spotify-web-api episodes check-saved-episodes --ids <string>    # Check User's Saved Episodes
+
+```
+
+```bash
+spotify-web-api episodes get-several --ids <string>    # Get Several Episodes
+
+```
+
+List all commands in this group: `spotify-web-api episodes --help`
+
+### `genres`
+
+```bash
+spotify-web-api genres get-available-seeds    # Get Available Genre Seeds
+
+```
+
+List all commands in this group: `spotify-web-api genres --help`
+
+### `library`
+
+```bash
+spotify-web-api library albums-check-saved --ids <string>    # Check User's Saved Albums
+
+```
+
+```bash
+spotify-web-api library albums-get-saved    # Get User's Saved Albums
+
+```
+
+List all commands in this group: `spotify-web-api library --help`
+
+### `markets`
+
+```bash
+spotify-web-api markets list-available    # Get Available Markets
+
+```
+
+List all commands in this group: `spotify-web-api markets --help`
+
+### `player`
+
+```bash
+spotify-web-api player add-item-to-queue --uri <string>    # Add Item to Playback Queue
+
+```
+
+```bash
+spotify-web-api player get-available-devices    # Get Available Devices
+
+```
+
+List all commands in this group: `spotify-web-api player --help`
+
+### `playlists`
+
+```bash
+spotify-web-api playlists add-items --playlist-id <string>    # Add Items to Playlist
+
+```
+
+```bash
+spotify-web-api playlists create-playlist --user-id <string>    # Create Playlist
+
+```
+
+List all commands in this group: `spotify-web-api playlists --help`
+
+### `search`
+
+```bash
+spotify-web-api search spotify-catalog-info --q <string> --type <array>    # Search for Item
+
+```
+
+List all commands in this group: `spotify-web-api search --help`
+
+### `shows`
+
+```bash
+spotify-web-api shows check-saved-shows --ids <string>    # Check User's Saved Shows
+
+```
+
+```bash
+spotify-web-api shows get-episodes-by-id --id <string>    # Get Show Episodes
+
+```
+
+List all commands in this group: `spotify-web-api shows --help`
+
+### `tracks`
+
+```bash
+spotify-web-api tracks albums-get-tracks-by-id --id <string>    # Get Album Tracks
+
+```
+
+```bash
+spotify-web-api tracks artists-get-top --id <string>    # Get Artist's Top Tracks
+
+```
+
+List all commands in this group: `spotify-web-api tracks --help`
+
+### `users`
+
+```bash
+spotify-web-api users check-following-artists-users --type <string> --ids <string>    # Check If User Follows Artists or Users
+
+```
+
+```bash
+spotify-web-api users check-if-follows-playlist --playlist-id <string> --ids <string>    # Check if Users Follow Playlist
+
+```
+
+List all commands in this group: `spotify-web-api users --help`
+
+
+## Output and parsing
+
+All output is JSON by default and goes to stdout. Errors go to stderr as a single-line JSON object — stdout stays clean for piping.
+
+```bash
+spotify-web-api <cmd> --jq <path>          # extract fields without jq installed (GJSON syntax)
+spotify-web-api <cmd> -o yaml              # change format: json (default), yaml, table, compact, raw, pretty
+spotify-web-api <cmd> --dry-run            # print the HTTP request without sending it
+spotify-web-api <cmd> --schema             # JSON schema of inputs and outputs for that command
+```
+
+GJSON path examples:
+- `--jq id` — scalar
+- `--jq items.#.id` — every id from an array
+- `--jq "items.#(active==true)#"` — filter array by condition
+
+## Exit codes
+
+Branch on `$?` rather than parsing stderr:
+
+| Code | Meaning |
+|------|---------|
+| 0 | success |
+| 1 | unknown error |
+| 2 | auth failed (401 / 403) |
+| 3 | not found (404) |
+| 4 | validation error (400 / 422) |
+| 5 | rate limited (429) |
+| 6 | server error (5xx) |
+| 7 | network error |
+
+Error JSON shape on stderr:
+```json
+{"error":true,"code":"not_found","status":404,"message":"...","exit_code":3}
+```
+
+## Common workflows
+
+### List then fetch one
+```bash
+ID=$(spotify-web-api <group> list --jq "items.0.id")
+spotify-web-api <group> get --id "$ID"
+```
+
+### Capture a created ID
+```bash
+ID=$(spotify-web-api <group> create [flags] --jq id)
+```
+
+### Safe destructive call
+```bash
+spotify-web-api <group> delete --id X --dry-run    # inspect first
+spotify-web-api <group> delete --id X              # exit 0 = deleted, 3 = not found
+```
+
+### Branch on exit code
+```bash
+spotify-web-api <cmd> [flags]
+case $? in
+  0) : success ;;
+  2) echo "fix credentials" ;;
+  3) echo "not found, skip" ;;
+  5) sleep 10 ; retry ;;
+esac
+```
+
+## Discovering more
+
+```bash
+spotify-web-api --help                              # top-level groups
+spotify-web-api <group> --help                      # commands in a group
+spotify-web-api <group> <cmd> --help                # flags + description
+spotify-web-api <group> <cmd> --schema              # JSON schema
+spotify-web-api agent-instructions                  # this file, embedded in the binary
+```
+

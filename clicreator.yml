@@ -1,0 +1,179 @@
+cli:
+  name: spotify-web-api
+  env_prefix: SPOTIFY_WEB_API
+  version: "0.1.0"
+
+environments:
+  production: https://api.spotify.com/v1
+
+security_schemes:
+
+security:
+  - oauth_2_0: []
+
+resources:
+  library:
+    methods:
+      audiobooks-list-saved: "get /me/audiobooks"
+      audiobooks-save-current-user: "put /me/audiobooks"
+      audiobooks-remove-from: "delete /me/audiobooks"
+      audiobooks-check-user-saved: "get /me/audiobooks/contains"
+      playlists-update-details: "put /playlists/{playlist_id}"
+      playlists-get-user-playlists: "get /me/playlists"
+      albums-get-saved: "get /me/albums"
+      albums-save-current-user: "put /me/albums"
+      albums-remove-saved: "delete /me/albums"
+      albums-check-saved: "get /me/albums/contains"
+      tracks-get-user-saved: "get /me/tracks"
+      tracks-save-for-current-user: "put /me/tracks"
+      tracks-remove-from: "delete /me/tracks"
+      tracks-check-saved: "get /me/tracks/contains"
+      episodes-get-user-saved-episodes: "get /me/episodes"
+      episodes-save-current-user: "put /me/episodes"
+      episodes-remove-from: "delete /me/episodes"
+      episodes-check-saved-episodes: "get /me/episodes/contains"
+      shows-get-user-saved-shows: "get /me/shows"
+      shows-save-current-user: "put /me/shows"
+      shows-remove-user: "delete /me/shows"
+      shows-check-saved-shows: "get /me/shows/contains"
+      users-get-top-items: "get /me/top/{type}"
+      playlists-create-playlist: "post /users/{user_id}/playlists"
+      users-get-followed-artists: "get /me/following"
+      users-follow-artists-or-users: "put /me/following"
+      users-unfollow-artists-users: "delete /me/following"
+      users-check-following-artists-users: "get /me/following/contains"
+  tracks:
+    methods:
+      albums-get-tracks-by-id: "get /albums/{id}/tracks"
+      artists-get-top: "get /artists/{id}/top-tracks"
+      get-by-spotify-id: "get /tracks/{id}"
+      get-multiple-by-ids: "get /tracks"
+      playlists-get-playlist-items: "get /playlists/{playlist_id}/tracks"
+      playlists-add-items: "post /playlists/{playlist_id}/tracks"
+      playlists-update-playlist-items: "put /playlists/{playlist_id}/tracks"
+      playlists-remove-items: "delete /playlists/{playlist_id}/tracks"
+      get-user-saved: "get /me/tracks"
+      save-for-current-user: "put /me/tracks"
+      remove-from-library: "delete /me/tracks"
+      check-saved: "get /me/tracks/contains"
+      users-get-top-items: "get /me/top/{type}"
+      get-multiple-audio-features: "get /audio-features"
+      get-audio-features-by-id: "get /audio-features/{id}"
+      get-audio-analysis: "get /audio-analysis/{id}"
+      get-recommendations: "get /recommendations"
+  playlists:
+    methods:
+      get-playlist-by-id: "get /playlists/{playlist_id}"
+      update-details: "put /playlists/{playlist_id}"
+      get-playlist-items: "get /playlists/{playlist_id}/tracks"
+      add-items: "post /playlists/{playlist_id}/tracks"
+      update-playlist-items: "put /playlists/{playlist_id}/tracks"
+      remove-items: "delete /playlists/{playlist_id}/tracks"
+      playlists-get-user-playlists: "get /me/playlists"
+      get-playlists-get-user-playlists: "get /users/{user_id}/playlists"
+      create-playlist: "post /users/{user_id}/playlists"
+      users-follow: "put /playlists/{playlist_id}/followers"
+      users-unfollow: "delete /playlists/{playlist_id}/followers"
+      get-featured: "get /browse/featured-playlists"
+      get-category-playlists: "get /browse/categories/{category_id}/playlists"
+      get-cover-image: "get /playlists/{playlist_id}/images"
+      replace-cover-image: "put /playlists/{playlist_id}/images"
+      users-check-if-follows: "get /playlists/{playlist_id}/followers/contains"
+  player:
+    methods:
+      get-current-playback-state: "get /me/player"
+      transfer-playback-to-new-device: "put /me/player"
+      get-available-devices: "get /me/player/devices"
+      get-currently-playing-track: "get /me/player/currently-playing"
+      start-playback: "put /me/player/play"
+      pause-playback: "put /me/player/pause"
+      skip-to-next-track: "post /me/player/next"
+      skip-to-previous-track: "post /me/player/previous"
+      seek-to-position: "put /me/player/seek"
+      set-repeat-mode: "put /me/player/repeat"
+      set-playback-volume: "put /me/player/volume"
+      toggle-playback-shuffle: "put /me/player/shuffle"
+      get-recently-played-tracks: "get /me/player/recently-played"
+      get-user-queue: "get /me/player/queue"
+      add-item-to-queue: "post /me/player/queue"
+  users:
+    methods:
+      get-current-user-profile: "get /me"
+      get-top-items: "get /me/top/{type}"
+      get-user-profile: "get /users/{user_id}"
+      playlists-get-user-playlists: "get /users/{user_id}/playlists"
+      follow-playlist: "put /playlists/{playlist_id}/followers"
+      unfollow-playlist: "delete /playlists/{playlist_id}/followers"
+      get-followed-artists: "get /me/following"
+      follow-artists-or-users: "put /me/following"
+      unfollow-artists-users: "delete /me/following"
+      check-following-artists-users: "get /me/following/contains"
+      check-if-follows-playlist: "get /playlists/{playlist_id}/followers/contains"
+  albums:
+    methods:
+      get-information: "get /albums/{id}"
+      list-several: "get /albums"
+      get-tracks-by-id: "get /albums/{id}/tracks"
+      artists-get-albums-by-id: "get /artists/{id}/albums"
+      get-saved: "get /me/albums"
+      save-current-user-library: "put /me/albums"
+      remove-saved: "delete /me/albums"
+      check-saved: "get /me/albums/contains"
+      get-new-releases: "get /browse/new-releases"
+  artists:
+    methods:
+      artists-get-catalog-info: "get /artists/{id}"
+      get-artists-get-catalog-info: "get /artists"
+      get-albums-by-id: "get /artists/{id}/albums"
+      get-top-tracks: "get /artists/{id}/top-tracks"
+      get-related-artists: "get /artists/{id}/related-artists"
+      users-get-followed: "get /me/following"
+      users-follow-artists-or-users: "put /me/following"
+      users-unfollow-artists-users: "delete /me/following"
+      users-check-following-artists-users: "get /me/following/contains"
+  audiobooks:
+    methods:
+      get-catalog-info: "get /audiobooks/{id}"
+      get-several: "get /audiobooks"
+      get-chapters-by-id: "get /audiobooks/{id}/chapters"
+      list-saved: "get /me/audiobooks"
+      save-current-user-library: "put /me/audiobooks"
+      remove-from-library: "delete /me/audiobooks"
+      check-user-saved: "get /me/audiobooks/contains"
+  episodes:
+    methods:
+      shows-get-episodes-by-id: "get /shows/{id}/episodes"
+      get-single-by-id: "get /episodes/{id}"
+      get-several: "get /episodes"
+      get-user-saved-episodes: "get /me/episodes"
+      save-current-user-library: "put /me/episodes"
+      remove-from-library: "delete /me/episodes"
+      check-saved-episodes: "get /me/episodes/contains"
+  shows:
+    methods:
+      get-information: "get /shows/{id}"
+      get-multiple-shows-info: "get /shows"
+      get-episodes-by-id: "get /shows/{id}/episodes"
+      get-user-saved-shows: "get /me/shows"
+      save-current-user-library: "put /me/shows"
+      remove-user-library: "delete /me/shows"
+      check-saved-shows: "get /me/shows/contains"
+  categories:
+    methods:
+      list-several: "get /browse/categories"
+      get-single: "get /browse/categories/{category_id}"
+      playlists-get-category-playlists: "get /browse/categories/{category_id}/playlists"
+  chapters:
+    methods:
+      audiobooks-get-chapters-by-id: "get /audiobooks/{id}/chapters"
+      get-chapter-info: "get /chapters/{id}"
+      get-multiple-by-ids: "get /chapters"
+  genres:
+    methods:
+      get-available-seeds: "get /recommendations/available-genre-seeds"
+  markets:
+    methods:
+      list-available: "get /markets"
+  search:
+    methods:
+      spotify-catalog-info: "get /search"
